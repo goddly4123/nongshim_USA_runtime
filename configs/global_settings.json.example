@@ -1,0 +1,128 @@
+{
+  "storage": {
+    "local_retention_days": 180,
+    "storage_type": "local",
+    "s3_bucket": "your-bucket-name",
+    "s3_region": "ap-northeast-2",
+    "s3_access_key": "YOUR_AWS_ACCESS_KEY",
+    "s3_secret_key": "YOUR_AWS_SECRET_KEY",
+    "s3_prefix": "",
+    "s3_retention_days": 365,
+    "s3_cleanup_interval_hours": 6
+  },
+  "admin": {
+    "password": "pbkdf2:sha256:924d9678ca27ca81058d07c295fb1bce:4e74be82299bd8aff83edd2d686bce6f995b43a84eb679094c926b76e857e8c9"
+  },
+  "layout": {
+    "0": {
+      "i": "0",
+      "x": 0,
+      "y": 0,
+      "w": 30,
+      "h": 15,
+      "minW": 3,
+      "minH": 3,
+      "moved": false,
+      "static": false
+    },
+    "1": {
+      "i": "1",
+      "x": 30,
+      "y": 0,
+      "w": 30,
+      "h": 15,
+      "minW": 3,
+      "minH": 3,
+      "moved": false,
+      "static": false
+    },
+    "2": {
+      "i": "2",
+      "x": 0,
+      "y": 15,
+      "w": 8,
+      "h": 4,
+      "minW": 3,
+      "minH": 3,
+      "moved": false,
+      "static": false
+    },
+    "3": {
+      "i": "3",
+      "x": 8,
+      "y": 15,
+      "w": 8,
+      "h": 4,
+      "minW": 3,
+      "minH": 3,
+      "moved": false,
+      "static": false
+    },
+    "4": {
+      "i": "4",
+      "x": 16,
+      "y": 15,
+      "w": 8,
+      "h": 4,
+      "minW": 3,
+      "minH": 3,
+      "moved": false,
+      "static": false
+    },
+    "5": {
+      "i": "5",
+      "x": 24,
+      "y": 15,
+      "w": 8,
+      "h": 4,
+      "minW": 3,
+      "minH": 3,
+      "moved": false,
+      "static": false
+    },
+    "6": {
+      "i": "6",
+      "x": 32,
+      "y": 15,
+      "w": 7,
+      "h": 4,
+      "minW": 3,
+      "minH": 3,
+      "moved": false,
+      "static": false
+    },
+    "7": {
+      "i": "7",
+      "x": 39,
+      "y": 15,
+      "w": 7,
+      "h": 4,
+      "minW": 3,
+      "minH": 3,
+      "moved": false,
+      "static": false
+    },
+    "8": {
+      "i": "8",
+      "x": 46,
+      "y": 15,
+      "w": 7,
+      "h": 4,
+      "minW": 3,
+      "minH": 3,
+      "moved": false,
+      "static": false
+    },
+    "9": {
+      "i": "9",
+      "x": 53,
+      "y": 15,
+      "w": 7,
+      "h": 4,
+      "minW": 3,
+      "minH": 3,
+      "moved": false,
+      "static": false
+    }
+  }
+}

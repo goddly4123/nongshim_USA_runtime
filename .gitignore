@@ -1,0 +1,40 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Data and model weights (too large or runtime-generated)
+data/
+weights/
+*.pt
+*.pth
+
+# macOS system files
+.DS_Store
+
+# IDE and temporary files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node.js
+node_modules/
+dist/
+
+# Project-specific
+only_image/
+sample_Ansung_factory/
+image.png
+plan.md
+
+# Secrets and local configuration
+configs/global_settings.json
+.env
+.env.local

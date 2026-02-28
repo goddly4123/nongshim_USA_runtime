@@ -1,0 +1,49 @@
+{
+  "_description": "PaddleOCR Date Check — Balanced (Speed & Accuracy)",
+  "line_name": "date_check_balanced",
+  "project_name": "Date Verification (Balanced)",
+  "enabled": true,
+  "camera_type": "webcam",
+  "camera_ip": "0",
+  "pfs_file": "camera.pfs",
+  "reject_pulse_count": 1,
+  "detector_type": "paddleocr",
+  "detector_config": {
+    "lang": "en",
+    "change_date": "2026\\.06\\.01",
+    "class_name": "date_check",
+    "use_angle_cls": true,
+    "det_limit_side_len": 960,
+    "rec_batch_num": 6,
+    "use_dilation": false
+  },
+  "active_product": "Default",
+  "products": {
+    "Default": {
+      "rotation": "NONE",
+      "crop_region": null,
+      "model_path": "",
+      "class_thresholds": {},
+      "save_thresholds": null,
+      "device": "cpu",
+      "reject_delay_frames": 10,
+      "reject_positions": 1,
+      "time_valve_on": 0.1,
+      "pre_valve_delay": 0,
+      "save_root": "./data",
+      "retention_days": 180,
+      "max_preview": 50,
+      "save_normal": false,
+      "detector_type": "paddleocr",
+      "detector_config": {
+        "lang": "en",
+        "change_date": "2026\\.06\\.01",
+        "class_name": "date_check",
+            "use_angle_cls": true,
+        "det_limit_side_len": 960,
+        "rec_batch_num": 6,
+        "use_dilation": false
+      }
+    }
+  }
+}
