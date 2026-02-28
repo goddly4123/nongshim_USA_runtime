@@ -35,6 +35,5 @@ image.png
 plan.md
 
 # Secrets and local configuration
-configs/global_settings.json
 .env
 .env.local
