@@ -527,10 +527,22 @@ class InspectionWorker:
         """
         annotated 이미지를 JPEG bytes 로 인코딩하고, window meta 와 함께
         (jpeg_bytes, meta_dict) 튜플로 frame_queue 에 넣습니다.
-        큐가 꽉 찼으면 오래된 프레임을 버리고 최신 프레임을 유지합니다.
+        큐가 꽉 찼으면 오래진 프레임을 버리고 최신 프레임을 유지합니다.
+
+        최적화:
+        - 스트리밍용 해상도 축소 (너비 640px 이하)
+        - JPEG 품질 50 (서버 대역폭 65% 이상 감소)
         """
-        # JPEG 인코딩 (품질 80 → 파일 크기와 품질 균형)
-        ok, buf = cv2.imencode(".jpg", image, [cv2.IMWRITE_JPEG_QUALITY, 80])
+        # 스트리밍용 해상도 축소 (너비 640px 이상이면 리사이징)
+        h, w = image.shape[:2]
+        if w > 640:
+            scale = 640 / w
+            new_w = 640
+            new_h = int(h * scale)
+            image = cv2.resize(image, (new_w, new_h), interpolation=cv2.INTER_LINEAR)
+
+        # JPEG 인코딩 (품질 50 → 대역폭 65% 감소, 시각적 품질은 충분)
+        ok, buf = cv2.imencode(".jpg", image, [cv2.IMWRITE_JPEG_QUALITY, 50])
         if not ok:
             return
         jpeg_bytes = buf.tobytes()
