@@ -38,7 +38,6 @@ backend/main.py — Ansung Vision Inspection FastAPI 서버
 from __future__ import annotations
 
 import asyncio
-import hashlib
 import importlib.util
 import json
 import logging
@@ -176,29 +175,10 @@ _DEFAULT_ADMIN = {
 }
 
 
-# ── 비밀번호 해싱 함수 ────────────────────────────────────────────────────────────
-def _hash_password(plain: str) -> str:
-    """PBKDF2-SHA256으로 비밀번호를 해싱합니다."""
-    salt = secrets.token_hex(16)
-    dk = hashlib.pbkdf2_hmac('sha256', plain.encode(), salt.encode(), 260000)
-    return f"pbkdf2:sha256:{salt}:{dk.hex()}"
-
-
-def _verify_password(plain: str, hashed: str) -> bool:
-    """저장된 해시와 입력 비밀번호를 안전하게 비교합니다.
-    레거시 평문 비밀번호도 호환 처리 (pbkdf2: 접두사 없으면 평문 비교 후 자동 해싱).
-    """
-    # 레거시 평문 비밀번호 호환: pbkdf2: 접두사 없으면 평문 비교
-    if not hashed.startswith("pbkdf2:"):
-        return secrets.compare_digest(plain, hashed)
-
-    # 해싱된 비밀번호: pbkdf2:sha256:{salt}:{hash}
-    try:
-        _, _, salt, stored = hashed.split(":", 3)
-        dk = hashlib.pbkdf2_hmac('sha256', plain.encode(), salt.encode(), 260000)
-        return secrets.compare_digest(dk.hex(), stored)
-    except (ValueError, IndexError):
-        return False
+# ── 비밀번호 검증 함수 ────────────────────────────────────────────────────────────
+def _verify_password(plain: str, stored: str) -> bool:
+    """저장된 평문 비밀번호와 입력 비밀번호를 비교합니다."""
+    return secrets.compare_digest(plain, stored)
 
 
 def _load_global_settings() -> dict:
@@ -1125,8 +1105,8 @@ def update_admin_password(body: AdminPasswordUpdate):
     if not _verify_password(body.current_password, stored_password):
         raise HTTPException(status_code=403, detail="Current password is incorrect")
 
-    # 새 비밀번호는 항상 해싱되어 저장
-    settings["admin"] = {"password": _hash_password(body.new_password)}
+    # 새 비밀번호를 평문으로 저장
+    settings["admin"] = {"password": body.new_password}
     _save_global_settings(settings)
     return {"message": "Admin password updated"}
 
